@@ -9,6 +9,12 @@ public class DataManager : MonoBehaviour
         CookieData = SaveLoadService.Load<CookieData>();
         ServiceLocator.Set(this);
     }
+
+    public void DataReset()
+    {
+        CookieData = SaveLoadService.Reset<CookieData>();
+    }
+
     private void OnDisable()
     {
         SaveLoadService.Save(CookieData);
