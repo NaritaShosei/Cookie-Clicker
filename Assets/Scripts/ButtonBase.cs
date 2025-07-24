@@ -20,13 +20,11 @@ public class ButtonBase : MonoBehaviour,
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             OnClick?.Invoke();
-            IsClicked = true;
         }
 
         else if (eventData.button == PointerEventData.InputButton.Right)
         {
             OnRightClick?.Invoke();
-            IsClicked = true;
         }
     }
 
