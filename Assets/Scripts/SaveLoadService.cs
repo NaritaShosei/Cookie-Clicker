@@ -28,6 +28,14 @@ public class SaveLoadService
         return JsonUtility.FromJson<T>(json);
     }
 
+    public static T Reset<T>()
+    {
+        T data = Activator.CreateInstance<T>();
+        Save(data);
+        Debug.Log($"reset完了");
+        return data;
+    }
+
     private static string GetPath<T>()
     {
         return Path.Combine(Application.persistentDataPath, typeof(T).Name + _extension);
