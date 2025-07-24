@@ -2,11 +2,15 @@
 
 public class DataManager : MonoBehaviour
 {
-    public CookieData CookieData {  get; private set; }
+    public CookieData CookieData { get; private set; }
 
     private void Awake()
     {
-        CookieData = new CookieData();
+        CookieData = SaveLoadService.Load<CookieData>();
         ServiceLocator.Set(this);
+    }
+    private void OnDisable()
+    {
+        SaveLoadService.Save(CookieData);
     }
 }

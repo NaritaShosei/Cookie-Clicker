@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class CookieData
 {
-    public int CookieCount { get; private set; }
+    public int CookieCount;
 
     public void AddCookie(int cookie)
     {
