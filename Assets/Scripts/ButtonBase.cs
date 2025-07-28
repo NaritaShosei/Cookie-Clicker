@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class ButtonBase : MonoBehaviour,
@@ -7,12 +8,12 @@ public class ButtonBase : MonoBehaviour,
     IPointerDownHandler, IPointerUpHandler
 {
     public bool IsClicked { get; private set; } = false;
-    public Action OnClick;
-    public Action OnRightClick;
-    public Action OnMouseDown;
-    public Action OnMouseUp;
-    public Action OnMouseEnter;
-    public Action OnMouseExit;
+    public UnityEvent OnClick;
+    public UnityEvent OnRightClick;
+    public UnityEvent  OnMouseDown;
+    public UnityEvent OnMouseUp;
+    public UnityEvent OnMouseEnter;
+    public UnityEvent OnMouseExit;
 
     public void OnPointerClick(PointerEventData eventData)
     {

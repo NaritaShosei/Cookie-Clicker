@@ -7,8 +7,8 @@ public class Cookie : ButtonBase
 
     private void Start()
     {
-        OnClick += AddPoint;
-        OnRightClick += ResetPoint;
+        OnClick.AddListener(AddPoint);
+        OnRightClick.AddListener(ResetPoint);
         _dataManager = ServiceLocator.Get<DataManager>();
     }
 
