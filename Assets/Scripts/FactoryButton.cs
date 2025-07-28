@@ -1,0 +1,24 @@
+﻿using UnityEngine;
+
+public class FactoryButton : ButtonBase
+{
+    [SerializeField] private int _rate;
+    [SerializeField] private string _factoryName = "";
+    private FactoryData _data;
+
+    private void Start()
+    {
+        OnClick.AddListener(AddFactory);
+        _data = ServiceLocator.Get<DataManager>().GetFactory(_factoryName);
+    }
+
+    public void AddFactory()
+    {
+        if (_data == null)
+        {
+            _data = new FactoryData { Name = _factoryName };
+            ServiceLocator.Get<DataManager>().CreateFactory(_data);
+        }
+        _data.AddClicker();
+    }
+}
