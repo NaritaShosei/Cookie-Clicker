@@ -21,9 +21,8 @@ public class DataManager : MonoBehaviour
         return CookieData.FactoryDatas.Find(f => f.Name == name);
     }
 
-    public void CreateFactory(FactoryData data)
+    public void AddFactory(FactoryData data)
     {
-        if (CookieData.FactoryDatas.Contains(data)) { return; }
         CookieData.FactoryDatas.Add(data);
     }
 

@@ -14,10 +14,11 @@ public class FactoryButton : ButtonBase
 
     public void AddFactory()
     {
+        if (_factoryName == "") { Debug.LogWarning("名前を変更してください。空文字のままです。"); }
         if (_data == null)
         {
             _data = new FactoryData { Name = _factoryName };
-            ServiceLocator.Get<DataManager>().CreateFactory(_data);
+            ServiceLocator.Get<DataManager>().AddFactory(_data);
         }
         _data.AddClicker();
     }
