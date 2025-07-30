@@ -13,6 +13,13 @@ public class DataManager : MonoBehaviour
 
     public void DataReset()
     {
+        var factorys = FindObjectsByType<FactoryView>(FindObjectsSortMode.None);
+
+        foreach (var factory in factorys)
+        {
+            factory.ResetFactory();
+        }
+
         CookieData = SaveLoadService.Reset<CookieData>();
     }
 
@@ -24,6 +31,11 @@ public class DataManager : MonoBehaviour
     public void AddFactory(FactoryData data)
     {
         CookieData.FactoryDatas.Add(data);
+    }
+
+    public void Save()
+    {
+        SaveLoadService.Save(CookieData);
     }
 
     private void OnDisable()
