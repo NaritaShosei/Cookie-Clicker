@@ -13,9 +13,9 @@ public class DataManager : MonoBehaviour
 
     public void DataReset()
     {
-        var factorys = FindObjectsByType<FactoryView>(FindObjectsSortMode.None);
+        var factories = FindObjectsByType<FactoryView>(FindObjectsSortMode.None);
 
-        foreach (var factory in factorys)
+        foreach (var factory in factories)
         {
             factory.ResetFactory();
         }

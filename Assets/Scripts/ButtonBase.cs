@@ -10,7 +10,7 @@ public class ButtonBase : MonoBehaviour,
     public bool IsClicked { get; private set; } = false;
     public UnityEvent OnClick;
     public UnityEvent OnRightClick;
-    public UnityEvent  OnMouseDown;
+    public UnityEvent OnMouseDown;
     public UnityEvent OnMouseUp;
     public UnityEvent OnMouseEnter;
     public UnityEvent OnMouseExit;
@@ -47,5 +47,10 @@ public class ButtonBase : MonoBehaviour,
     public void OnPointerUp(PointerEventData eventData)
     {
         OnMouseUp?.Invoke();
+    }
+
+    public void SetClicked(bool value)
+    {
+        IsClicked = value;
     }
 }
