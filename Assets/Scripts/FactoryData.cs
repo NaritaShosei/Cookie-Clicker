@@ -11,4 +11,5 @@ public class FactoryData
     {
         AutoClickCount++;
     }
+    public int GetCurrentCost() => BaseCost * (int)Mathf.Pow(1.15f, AutoClickCount);
 }

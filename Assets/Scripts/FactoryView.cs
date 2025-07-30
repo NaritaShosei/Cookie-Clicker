@@ -1,18 +1,39 @@
-﻿using DG.Tweening;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class FactoryView : ButtonBase
 {
     [SerializeField] private int _rate;
     [SerializeField] private string _factoryName = "";
-    [SerializeField] private int _cost;
-    [SerializeField] private int _cookiePerSecond;
+    [SerializeField] private int _cost = 50;
+    [SerializeField] private int _cookiePerSecond = 1;
     private FactoryData _data;
     private Sequence _sequence;
+    DataManager _dataManager;
+    private CancellationTokenSource _cts;
     private void Start()
     {
         OnClick.AddListener(AddFactory);
         _data = ServiceLocator.Get<DataManager>().GetFactory(_factoryName);
+        _cts = new CancellationTokenSource();
+        _dataManager = ServiceLocator.Get<DataManager>();
+        if (_data != null)
+        {
+            AutoClick(_cts.Token).Forget();
+        }
+    }
+
+    private async UniTask AutoClick(CancellationToken token)
+    {
+        while (true)
+        {
+            await UniTask.Delay(1000, cancellationToken: token);
+            _dataManager.CookieData.AddCookie(_data.CookiePerSecond * _data.AutoClickCount);
+        }
     }
 
     public void AddFactory()
@@ -31,6 +52,10 @@ public class FactoryView : ButtonBase
                 };
 
             ServiceLocator.Get<DataManager>().AddFactory(_data);
+
+            _cts = new CancellationTokenSource();
+
+            AutoClick(_cts.Token).Forget();
         }
         _data.AddClicker();
         Click();
@@ -47,6 +72,12 @@ public class FactoryView : ButtonBase
     public void ResetFactory()
     {
         _data = null;
+
         Debug.LogWarning("施設のデータをリセットしました");
+
+        if (_cts == null) { return; }
+        _cts.Cancel();
+        _cts.Dispose();
+        _cts = null;
     }
 }
