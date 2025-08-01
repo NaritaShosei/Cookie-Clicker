@@ -9,6 +9,10 @@ public class DataManager : MonoBehaviour
     {
         CookieData = SaveLoadService.Load<CookieData>();
         ServiceLocator.Set(this);
+        if (CookieData == null)
+        {
+            CookieData = new CookieData();
+        }
     }
 
     public void DataReset()
@@ -25,6 +29,7 @@ public class DataManager : MonoBehaviour
 
     public FactoryData GetFactory(string name)
     {
+        if (CookieData == null) { return null; }
         return CookieData.FactoryDatas.Find(f => f.Name == name);
     }
 

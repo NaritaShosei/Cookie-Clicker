@@ -38,6 +38,9 @@ public class FactoryView : ButtonBase
 
     public void AddFactory()
     {
+        int cost = _data != null ? _data.GetCurrentCost() : _cost;
+        if (_dataManager.CookieData.CookieCount < cost) { Debug.Log($"{cost}未満です"); return; }
+
         if (_factoryName == "") { Debug.LogWarning("名前を変更してください。空文字のままです。"); }
         if (_data == null)
         {
@@ -57,6 +60,7 @@ public class FactoryView : ButtonBase
 
             AutoClick(_cts.Token).Forget();
         }
+        _dataManager.CookieData.CookieCount -= cost;
         _data.AddClicker();
         Click();
     }
