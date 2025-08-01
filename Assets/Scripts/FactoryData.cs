@@ -10,6 +10,7 @@ public class FactoryData
     public void AddClicker()
     {
         AutoClickCount++;
+        Debug.Log(AutoClickCount);
     }
-    public int GetCurrentCost() => BaseCost * (int)Mathf.Pow(1.15f, AutoClickCount);
+    public int GetCurrentCost() => Mathf.RoundToInt(BaseCost * Mathf.Pow(1.15f, AutoClickCount));
 }

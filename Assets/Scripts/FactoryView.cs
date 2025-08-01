@@ -38,6 +38,11 @@ public class FactoryView : ButtonBase
 
     public void AddFactory()
     {
+        try
+        {
+            Debug.Log(_data.GetCurrentCost() + "今のコスト");
+        }
+        catch { }
         int cost = _data != null ? _data.GetCurrentCost() : _cost;
         if (_dataManager.CookieData.CookieCount < cost) { Debug.Log($"{cost}未満です"); return; }
 
